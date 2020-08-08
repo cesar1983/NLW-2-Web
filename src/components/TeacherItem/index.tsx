@@ -4,26 +4,40 @@ import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
 
 import "./styles.css";
 
-const TeacherItem = () => {
+export interface Teacher {
+  id: number;
+  name: string;
+  avatar: string;
+  bio: string;
+  cost: number;
+  subject: string;
+  whatsapp: string;
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   return (
     <article className="teacher-item">
       <header>
-        <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--zCIfqja8--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/394197/ba33cd85-47b5-4a87-b768-cc5e6e44f4d2.jpeg" />
+        <img alt="avatar" src={teacher.avatar} />
         <div>
-          <strong>Cesar</strong>
-          <span>Dev</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
-      <p>Dev top</p>
+      <p>{teacher.bio}</p>
       <footer>
         <p>
           Preço/hr
-          <strong>xx.x</strong>
+          <strong>{teacher.cost}</strong>
         </p>
-        <button type="button">
+        <a href={`https://wa.me/${teacher.whatsapp}`}>
           <img src={whatsappIcon} alt="Whatsapp" />
           Entrar em Contato
-        </button>
+        </a>
       </footer>
     </article>
   );
